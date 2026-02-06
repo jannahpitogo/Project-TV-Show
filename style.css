@@ -19,7 +19,6 @@ p {
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
-
   overflow: hidden;
 }
 
@@ -31,8 +30,16 @@ section {
   height: 100%;
   padding: 20px;
   border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 h2 {
   border: solid black;
+  padding: 5px;
+}
+
+img {
+  width: 250px;
+  height: 150px;
 }
