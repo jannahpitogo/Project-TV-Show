@@ -17,6 +17,14 @@ body {
   margin: 10px;
 }
 
+input {
+  margin-right: 10px;
+}
+
+span {
+  color: white;
+}
+
 p {
   text-align: justify;
   overflow: hidden;
@@ -48,3 +56,4 @@ img {
   width: 250px;
   height: 150px;
 }
+

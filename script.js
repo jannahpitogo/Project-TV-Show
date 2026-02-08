@@ -11,6 +11,8 @@ const handleInput = (event) => {
   render()
 }
 
+let movieMatch = 0;
+
 //Making the card of films.
 function createCard(filterFilms) {
   let cards = []
@@ -28,15 +30,6 @@ function createCard(filterFilms) {
     `S${season.toString().padStart(2, "0")}` +
     `E${number.toString().padStart(2, "0")}`;
   //Line 8 just make an output like "S05E06", I just combined 2 template literals to make and combined the season and episode.
-  // const title = document.createElement("h2");
-  // title.textContent = `${name} - ${seasonNumber}`;
-  // const img = document.createElement("img")
-  // img.src = medium;
-  // const description = document.createElement("p")
-  // description.innerHTML = summary;
-  // card.appendChild(title, img, summary)
-  // console.log(card)
-
 
   card.querySelector("h2").textContent = `${name} - ${seasonNumber}`;
   card.querySelector("img").src = medium;
@@ -49,6 +42,13 @@ return cards
 
 function render() {
   const filterFilms = state.films.filter((film) => film.name.toLowerCase().includes(state.searchTerm.toLowerCase())) 
+  const match = document.querySelector("span")
+
+  if (state.searchTerm) {
+    match.innerHTML = ""
+    match.innerHTML = `${filterFilms.length} match(es)`
+    document.getElementById("search-div").append(match)
+  }
 
   document.getElementById("root").replaceChildren(...createCard(filterFilms));
 }
