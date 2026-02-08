@@ -46,7 +46,7 @@ function render() {
 
   if (state.searchTerm) {
     match.innerHTML = ""
-    match.innerHTML = `${filterFilms.length} match(es)`
+    match.innerHTML = `Displaying ${filterFilms.length}/${state.films.length} episodes`
     document.getElementById("search-div").append(match)
   }
 
