@@ -34,9 +34,7 @@ return cards
 
 function render() {
   // Display films
-  console.log("search", state.searchTerm)
   const filterFilms = state.films.filter((film) => film.name.toLowerCase().includes(state.searchTerm.toLowerCase()) || film.summary.toLowerCase().includes(state.searchTerm.toLowerCase()) || film.id.toString().includes(state.searchTerm)) 
-  console.log("filter films,", filterFilms)
   if (state.searchTerm) {
     match.innerHTML = ""
     match.innerHTML = `Displaying ${filterFilms.length}/${state.films.length} episodes`
