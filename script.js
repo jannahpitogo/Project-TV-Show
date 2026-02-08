@@ -1,17 +1,9 @@
 //You can edit ALL of the code here
 const allEpisodes = getAllEpisodes();
 
+// Create State
 let state = {searchTerm: ""}
 state["films"] = allEpisodes
-
-const searchBox = document.getElementById("search")
-
-const handleInput = (event) => {
-  state.searchTerm = event.target.value 
-  render()
-}
-
-let movieMatch = 0;
 
 //Making the card of films.
 function createCard(filterFilms) {
@@ -41,19 +33,56 @@ return cards
 }
 
 function render() {
-  const filterFilms = state.films.filter((film) => film.name.toLowerCase().includes(state.searchTerm.toLowerCase())) 
-  const match = document.querySelector("span")
-
+  // Display films
+  console.log("search", state.searchTerm)
+  const filterFilms = state.films.filter((film) => film.name.toLowerCase().includes(state.searchTerm.toLowerCase()) || film.summary.toLowerCase().includes(state.searchTerm.toLowerCase()) || film.id.toString().includes(state.searchTerm)) 
+  console.log("filter films,", filterFilms)
   if (state.searchTerm) {
     match.innerHTML = ""
     match.innerHTML = `Displaying ${filterFilms.length}/${state.films.length} episodes`
     document.getElementById("search-div").append(match)
   }
-
   document.getElementById("root").replaceChildren(...createCard(filterFilms));
 }
 
 render()
+
+// Search box
+const searchBox = document.getElementById("search")
+const handleInput = (event) => {
+  state.searchTerm = event.target.value 
+  render()
+}
 searchBox.addEventListener("input", handleInput)
+
+// Displaying search results
+let match = document.querySelector("span")
+match.innerHTML = `Displaying ${state.films.length}/${state.films.length} episodes`
+
+// Episode selector
+const selector = document.getElementById("episode-selector")
+let episodes = []
+
+// Option to display all episodes from selector
+const allEpisodesOption = document.createElement("option")
+allEpisodesOption.value = ""
+allEpisodesOption.innerHTML = "All Episodes"
+episodes.push(allEpisodesOption)
+
+// An option for each movie
+state.films.forEach((film) => {
+  const option = document.createElement("option")
+  option.value = film.id
+  option.innerHTML = `S${film.season.toString().padStart(2, "0")}` +
+  `E${film.number.toString().padStart(2, "0")} - ${film.name}`
+  episodes.push(option)
+})
+selector.append(...episodes)
+
+// Re-render based on option selector
+selector.addEventListener("change", () => {
+  state.searchTerm = selector.value
+  render()
+})
 
 
