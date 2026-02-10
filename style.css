@@ -1,3 +1,60 @@
-#root {
-  color: red;
+body {
+  background: conic-gradient(at bottom right, #1d4ed8, #1e40af, #111827);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+#root {
+  display: grid;
+  grid-template-columns: 350px 350px 350px;
+  grid-template-rows: 400px;
+  grid-gap: 100px;
+  justify-items: center;
+}
+
+#search-div {
+  margin: 10px;
+}
+
+input {
+  margin-right: 10px;
+  color: white;
+}
+
+span {
+  color: white;
+}
+
+p {
+  text-align: justify;
+  overflow: hidden;
+  margin-top: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+section {
+  background-color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  border: solid black;
+  padding: 5px;
+}
+
+img {
+  width: 250px;
+  height: 150px;
+}
+
