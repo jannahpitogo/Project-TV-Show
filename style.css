@@ -3,11 +3,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* width: 1920px; */
 }
 
 #root {
   display: grid;
-  grid-template-columns: 350px 350px 350px;
+  grid-template-columns: 400px 400px 400px;
   grid-template-rows: 400px;
   grid-gap: 100px;
   justify-items: center;
@@ -19,7 +20,7 @@ body {
 
 input {
   margin-right: 10px;
-  color: white;
+  color: gray;
 }
 
 span {
