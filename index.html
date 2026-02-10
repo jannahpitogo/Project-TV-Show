@@ -9,6 +9,7 @@
   </head>
 
   <body>
+    <div id="main">
     <div id="search-div">
       <select name="episodes" id="episode-selector"></select>
       <input type="text" id="search" placeholder="search movie">
@@ -25,8 +26,21 @@
     
     <div id="root"></div>
 
+    </div>
+
+    <!--LOADING-->
+    <div hidden id="loading">
+      <h1>The films are loading, please wait</h1>
+    </div>
+
+
+    <!--ERROR-->
+    <div hidden id="error"> 
+      <h1>Something is not working, please recheck!</h1>
+    </div>
+
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <!-- <script src="episodes.js"></script> -->
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
