@@ -8,6 +8,8 @@ let state = {
   error: null
 }
 state["films"] = [];
+state["shows"] = [];
+state["showID"] = "1";
 
 let match = document.querySelector("span")
 
@@ -89,6 +91,7 @@ render();
 
 function episodeSelector(){
   const selector = document.getElementById("episode-selector")
+  selector.innerHTML = ""
   let episodes = []
   
   // Option to display all episodes from selector
@@ -114,7 +117,29 @@ function episodeSelector(){
 })
 }
 
+async function showSelector(){
+  const selector = document.getElementById("show-selector")
+  let shows = []
+
+  // An option for each show
+  state.shows.forEach((show) => {
+    const option = document.createElement("option")
+    option.value = show.id
+    option.innerHTML = show.name
+    shows.push(option)
+})
+    selector.append(...shows)
+
+    // Re-render based on option selector
+  selector.addEventListener("change", () => {
+    state.showID = selector.value
+    render()
+    fetchFilms(state.showID)
+})
+}
+
 function mainCall(){
+  showSelector()
   episodeSelector();
   displaySearch();
   searchFilter();
@@ -123,8 +148,25 @@ function mainCall(){
 
 render();     //make sure that render is called first.
 
+// To get info of all shows ans store in state.shows
+fetch('https://api.tvmaze.com/shows')
+  .then(response => {
+    if (!response.ok) throw new Error("Request Failed")
+    return response.json();
+  })
+  .then(data => {
+    state.shows = data;
+    state.isLoading = false;          
+    mainCall();                       
+  })
+  .catch(() => {
+    state.isLoading = false;
+    state.error = true;
+    render();
+  })
 
-fetch('https://api.tvmaze.com/shows/82/episodes')
+async function fetchFilms(showID) {
+  fetch(`https://api.tvmaze.com/shows/${showID}/episodes`)
   .then(response => {
     if (!response.ok) throw new Error("Request Failed")
     return response.json();     //storing the data into a json file.
@@ -141,4 +183,8 @@ fetch('https://api.tvmaze.com/shows/82/episodes')
     state.error = true;
     render();
   })
+}
+
+fetchFilms(state.showID)
+
 
