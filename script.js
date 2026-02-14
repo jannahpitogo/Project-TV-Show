@@ -149,21 +149,22 @@ function mainCall(){
 render();     //make sure that render is called first.
 
 // To get info of all shows ans store in state.shows
-fetch('https://api.tvmaze.com/shows')
-  .then(response => {
-    if (!response.ok) throw new Error("Request Failed")
-    return response.json();
-  })
-  .then(data => {
-    state.shows = data;
-    state.isLoading = false;          
-    mainCall();                       
-  })
-  .catch(() => {
-    state.isLoading = false;
-    state.error = true;
-    render();
-  })
+async function fetchShows() {
+  fetch('https://api.tvmaze.com/shows')
+    .then(response => {
+      if (!response.ok) throw new Error("Request Failed")
+      return response.json();
+    })
+    .then(data => {
+      state.shows = data;
+      state.isLoading = false;          
+      mainCall();                       
+    })
+    .catch(() => {
+      state.isLoading = false;
+      state.error = true;
+      render();
+  })}
 
 async function fetchFilms(showID) {
   fetch(`https://api.tvmaze.com/shows/${showID}/episodes`)
@@ -185,6 +186,7 @@ async function fetchFilms(showID) {
   })
 }
 
+fetchShows()
 fetchFilms(state.showID)
 
 
