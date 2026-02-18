@@ -129,10 +129,12 @@ async function showSelector(){
     shows.push(option)
 })
     selector.append(...shows)
+    selector.value = state.showID
 
     // Re-render based on option selector
   selector.addEventListener("change", () => {
     state.showID = selector.value
+    if (!state.showID) return
     render()
     fetchFilms(state.showID)
 })
@@ -188,4 +190,3 @@ async function fetchFilms(showID) {
 
 fetchShows()
 fetchFilms(state.showID)
-
