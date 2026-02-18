@@ -62,7 +62,7 @@ function render() {
   document.getElementById("error").hidden = true;
   document.getElementById("loading").hidden = true;
 
-  const filterFilms = state.films.filter((film) => film.name.toLowerCase().includes(state.searchTerm.toLowerCase()) || film.summary.toLowerCase().includes(state.searchTerm.toLowerCase()) || film.id.toString().includes(state.searchTerm)) 
+  const filterFilms = state.films.filter((film) => film.name.toLowerCase().includes(state.searchTerm.toLowerCase()) || film.summary.toLowerCase().includes(state.searchTerm.toLowerCase()) || film.id.toString() === state.searchTerm) 
 
     match.innerHTML = ""
     match.textContent = `Displaying ${filterFilms.length}/${state.films.length} episodes`
@@ -188,5 +188,4 @@ async function fetchFilms(showID) {
 
 fetchShows()
 fetchFilms(state.showID)
-
 
